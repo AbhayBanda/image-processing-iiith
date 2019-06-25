@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Color Image Processing</title>
+	<style>
+		body {
+			background-color: black;
+			color:#c3c3c3;
+		}
+		#Header {
+			background-color: #171717;
+			position: relative;
+			left: 100px;
+			width: 1000px;
+			height: 110px;
+			background-image: url("images/iiit.png");
+			background-repeat: no-repeat;
+			background-position: 
+		}
+		#leftInfo {
+			position: absolute;
+			width: 300px;
+			height: 300px;
+			left: 100px;
+		}
+		#instructionBox {
+			padding-top: 1px;
+			padding-left: 1px;
+			border: dashed grey 1px;
+		}
+		#buttons1 {
+			position: relative;
+			top:8px;
+			border: solid blue 1px;
+			border-radius: 5px;
+		}
+		 #buttons1:hover {
+  background-color: #3e8e41;
+}
+
+.btn-group2 .button2 { 
+  border: solid blue 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  float: left;
+  position: relative;
+  top: 15px;
+  border-radius: 5px;
+}
+
+.btn-group2 .button2:hover {
+  background-color: #3e8e41;
+}
+
+	#CSParameters {
+		position: relative;
+		top: 50px;
+		width: 300px;
+		height: 400px;
+		text-align: left;
+		border:dashed #c2c2c2 1px
+
+	}
+	#ioImages {
+		position: absolute;
+		left: 500px;
+		top:150px;
+		width: 700px;
+		height: 500px;
+	}
+
+	</style>
+</head>
+<body>
+
+	<div id = "Header">
+		<h1 style = "text-align: center; color: #c2c2c2">Virtual Lab for IMAGE PROCESSING</h1>
+	</div>
+	<div id = "leftInfo">
+		<h2 style="text-align: center; color:#c2c2c2; ">Colour Image Processing</h2>
+		<div id="instructionBox"><p style= "color: #c2c2c2; ">Select appropriate parameters and click on 'Run'.</p></div>
+		<button id = "buttons1">Select Image</button>
+		<button id = "buttons1" onClick="window.location.reload();">Reset</button>
+		<button id = "buttons1">Run</button>
+		<div class="btn-group2">
+				<button class = "button2">Color Spaces</button>
+				<button class = "button2">Processing</button>
+		</div>
+
+		<div id = "CSParameters">
+				<h4 style = "color: #c2c2c2">Select Color Space:</h4>
+				<input type="radio" name="csp" value="hsi"> HSI<br>
+  				<input type="radio" name="csp" value="cmy"> CMY<br>
+  				<input type="radio" name="csp" value="ycbcr"> YCbCr<br> 
+		</div>
+	</div>
+
+	<div id = "ioImages">
+		<h3>Input Images</h3>
+		<div id = "inputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 150px;">
+			<img src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 120px; height: 120px">
+			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 120px; height: 120px">
+			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 120px; height: 120px">
+			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 120px; width: 120px; height: 120px">
+
+		</div>
+		<h3>Output Images</h3>
+		<div id = "outputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 150px;">
+			<img src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 120px; height: 120px">
+			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 120px; height: 120px">
+			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 120px; height: 120px">
+			
+		</div>
+	</div>
+
+</body>
+</html>
