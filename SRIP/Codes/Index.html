@@ -70,18 +70,44 @@
 		width: 700px;
 		height: 500px;
 	}
+						#imageGrid {
+				
+			position:relative;
+			top: 0px;
+			left: 8px;
+			width: 400px;
+			height: 400px;
+
+		}
 
 	</style>
+
+
 </head>
 <body>
+		<script >
 
+			function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  expandImg.src = imgs.src;
+  expandImg.parentElement.style.display = "block";
+}
+		function showDiv()
+		{
+			document.getElementById('imageGrid').style.display = 'block';
+		}
+				function hideIg()
+		{
+			document.getElementById('imageGrid').style.display = 'none';
+		}
+	</script>
 	<div id = "Header">
 		<h1 style = "text-align: center; color: #c2c2c2">Virtual Lab for IMAGE PROCESSING</h1>
 	</div>
 	<div id = "leftInfo">
 		<h2 style="text-align: center; color:#c2c2c2; ">Colour Image Processing</h2>
 		<div id="instructionBox"><p style= "color: #c2c2c2; ">Select appropriate parameters and click on 'Run'.</p></div>
-		<button id = "buttons1">Select Image</button>
+		<button id = "buttons1" onclick="showDiv()">Select Image</button>
 		<button id = "buttons1" onClick="window.location.reload();">Reset</button>
 		<button id = "buttons1">Run</button>
 		<div class="btn-group2">
@@ -100,13 +126,15 @@
 	<div id = "ioImages">
 		<h3>Input Images</h3>
 		<div id = "inputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 150px;">
-			<img src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 120px; height: 120px">
-			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 120px; height: 120px">
-			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 120px; height: 120px">
-			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 120px; width: 120px; height: 120px">
-
+			<!--<img id="expandedImg" style="display:none;position : relative; top: 15px;left: 30px; width: 120px; height: 120px">-->
+			<img id = "expandedImg" src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 120px; height: 120px">
+			<img id = "redPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 120px; height: 120px">
+			<img id = "greenPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 120px; height: 120px">
+			<img id = "bluePlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 120px; width: 120px; height: 120px">
 		</div>
+
 		<h3>Output Images</h3>
+		
 		<div id = "outputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 150px;">
 			<img src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 120px; height: 120px">
 			<img src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 120px; height: 120px">
@@ -114,6 +142,47 @@
 			
 		</div>
 	</div>
+<div id = "imageGrid" style = "display: none">
+	
+
+	<div id = "image1" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style = "position: relative" src = "Images/img1.jpg" >
+	</div>
+
+	<div id = "image2" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style = "position:relative; top: -104px; left: 101px" src = "Mosaicc/img2.jpg" >
+	</div>
+
+	<div id = "image3">
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style =  "position:relative; top: -208px; left: 202px" src = "Mosaicc/img3.jpg" >
+	</div>
+
+	<div id = "image4" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style =  "position:relative; top: -211px" src = "Mosaicc/img4.jpg" >
+	</div>
+
+	<div id = "image5" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style =  "position:relative; top: -314px; left:101px" src = "Mosaicc/img5.jpg" >
+	</div>
+
+	<div id = "image6" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style =  "position:relative; top: -418px; left:202px" src = "Mosaicc/img6.jpg" >
+	</div>
+
+	<div id = "image7" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);" style =  "position:relative; top: -421px; " src = "Mosaicc/img7.jpg" >
+	</div>
+
+	<div id = "image8" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);"style =  "position:relative; top: -524px; left:101px" src = "Mosaicc/img8.jpg" >
+	</div>
+
+	<div id = "image9" >
+		<img width = 100 height = 100 onclick="hideIg();myFunction(this);"style =  "position:relative; top: -628px; left:201px" src = "Mosaicc/img9.jpg" >
+	</div>
+
+
+</div>
 
 </body>
 </html>
