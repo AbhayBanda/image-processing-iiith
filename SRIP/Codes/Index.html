@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<title>Color Image Processing</title>
 	<style>
 		body {
@@ -85,6 +86,15 @@
 			height: 400px;
 
 		}
+	.HSI {
+		display: none;
+	}
+		.CMY {
+		display: none;
+	}
+		.RGB {
+		display: none;
+	}
 
 	</style>
 
@@ -98,7 +108,6 @@
   			expandImg.src = imgs.src;
   			expandImg.parentElement.style.display = "block";
 			}
-
 			function showDiv() {
 				document.getElementById('imageGrid').style.display = 'block';
 			}
@@ -176,18 +185,55 @@
 				<button id = "buttons1" onClick="window.location.reload();">Reset</button>
 				<button id = "run" onclick = "hideInst();showInst1(); colorPlanes();">Run</button>
 				<div class="btn-group2">
-						<button class = "button2">Color Spaces</button>
-						<button class = "button2">Processing</button>
+						<button class = "button2" id = "colorSpace">Color Spaces</button>
+						<button class = "button2" id = "Processing">Processing</button>
 				</div>
 
 			<div id = "CSParameters">
 				<h4 style = "color: #c2c2c2">Select Color Space:</h4>
-				<input type="radio" name="csp" value="hsi"> HSI<br>
-  				<input type="radio" name="csp" value="cmy"> CMY<br>
-  				<input type="radio" name="csp" value="ycbcr"> YCbCr<br> 
+				<input type="radio" name="csp" id="hsi"> HSI<br>
+  				<input type="radio" name="csp" id="cmy"> CMY<br>
+  				<input type="radio" name="csp" id="rgb">YCbCr<br> 
 			</div>
-	</div>
+			<div id = "applyParam" style = "display: none">
+				<p style = "position: relative; top:-230px;">Apply Parameters to : </p>
+				<input style = "position: relative; top:-230px"; type="radio" name="hue" value="hsi"><br>
+  				<input style = "position: relative; top:-230px"; type="radio" name="saturation" value="cmy">
+  				<input style = "position: relative; top:-208px ;left: -24px"; type="radio" name="intensity" value="rgb">
+  				
+  				<span class = "HSI" style = "position: relative; top:-250px; left: -25px"> Hue</span>
+  				<span class = "HSI" style = "position: relative; top:-230px; left: -55px">Saturation</span>
+  				<span class = "HSI" style = "position: relative; top:-208px; left: -125px">Intensity</span>
 
+  				<span class = "CMY" style = "position: relative; top:-250px; left: -25px">Cyan</span>
+  				<span class = "CMY" style = "position: relative; top:-230px; left: -62px">Magenta</span>
+  				<span class = "CMY" style = "position: relative; top:-208px; left: -123px">Yellow</span>
+
+   				<span class = "RGB" style = "position: relative; top:-250px; left: -22px">Red</span>
+  				<span class = "RGB" style = "position: relative; top:-230px; left: -53px">Green</span>
+  				<span class = "RGB" style = "position: relative; top:-208px; left: -95px">Blue</span>
+			</div>
+
+	</div>
+		<script>
+			
+			$(document).ready(function() {
+				$("#Processing").click(function() {
+				if(!document.getElementById('hsi').checked && !document.getElementById('cmy').checked && !document.getElementById('rgb').checked ){alert("Please Select the Parameters")}
+				else if(document.getElementById('hsi').checked){ $("#applyParam").show(); $('.HSI').show(); $('.CMY').hide();
+				$('.RGB').hide()}
+					else if(document.getElementById('cmy').checked){ $("#applyParam").show(); $('.CMY').show();$('.HSI').hide(); $('.RGB').hide()}
+					else if(document.getElementById('rgb').checked){ $("#applyParam").show(); $('.RGB').show();$('.CMY').hide();$('.HSI').hide()}
+				});
+			});
+
+			$(document).ready(function() {
+				$('#colorSpace').click(function() {
+					$('#applyParam').hide();
+				});
+			});
+	
+		</script>
 	<div id = "ioImages">
 		<h3>Input Images</h3>
 		<div id = "inputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 600px; display:block">
