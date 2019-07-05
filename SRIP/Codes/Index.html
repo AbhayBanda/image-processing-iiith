@@ -101,31 +101,6 @@
 <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge">
 </head>
 <body>
-		<script >
-
-			function myFunction(imgs) {
- 			 var expandImg = document.getElementById("expandedImg");
-  			expandImg.src = imgs.src;
-  			expandImg.parentElement.style.display = "block";
-			}
-			function showDiv() {
-				document.getElementById('imageGrid').style.display = 'block';
-			}
-
-			function hideIg() {
-				document.getElementById('imageGrid').style.display = 'none';
-			}
-
-			function hideInst() {
-				document.getElementById('instructionCanvas').style.display = 'none';
-			}
-
-			function showInst1() {
-			document.getElementById('instructionCanvas2').style.display = 'block';
-			}
-
-	</script>
-
 	<div id = "Header">
 		<h1 style = "text-align: center; color: #c2c2c2">Virtual Lab for IMAGE PROCESSING</h1>
 	</div>
@@ -136,50 +111,11 @@
 
 		<canvas id = "instructionCanvas"></canvas>
 
-		<script>
-			var canvas = document.getElementById('instructionCanvas');
-			var ctx = canvas.getContext('2d');
-			canvas.style.display = 'block';
-			canvas.style.padding.top = "1px";
-			canvas.style.padding.left= "1px";
-			canvas.style.border= "dashed grey 1px";
-			canvas.position = "relative";
-			canvas.height = 50;
-			ctx.fillStyle = "#c2c2c2";
-			ctx.font = "13px Georgia";
-			ctx.position = "relative";
-			ctx.top = canvas.height/2;
-			ctx.fillText("Select appropriate parameters and click on 'Run'.", 10, 25);
-		</script>
-
 		<canvas id = "instructionCanvas2"></canvas>
-				<script>
-					var canvas1 = document.getElementById('instructionCanvas2');
-					var ctx1 = canvas1.getContext('2d');
-					canvas1.style.display = "none";
-					canvas1.style.padding.top = "1px";
-					canvas1.style.padding.left= "1px";
-					canvas1.style.border= "dashed grey 1px";
-					canvas1.position = "relative";
-					canvas1.height = 50;
-					ctx1.fillStyle = "#c2c2c2";
-					ctx1.font = "13px Georgia";
-					ctx1.position = "relative";
-					ctx1.top = canvas.height/2;
-					ctx1.fillText("Note down the results.", 10, 25);
-				</script>
+
 
 				<canvas id = "inputCanvas"></canvas>
-					<script>
-					  var c = document.getElementById("inputCanvas");
-					  c.style.display = 'none' 
-					  c.style.border = "solid red 2px";
-					  c.style.position = "absolute";
-					  c.style.left = "400px";
-					  c.style.top = "70px";
-					  c.style.width = "600px";
-					  c.style.height = "700px";
-					</script>
+
 
 				<button id = "buttons1" onclick="showDiv();">Select Image</button>
 				<button id = "buttons1" onClick="window.location.reload();">Reset</button>
@@ -197,9 +133,11 @@
 			</div>
 			<div id = "applyParam" style = "display: none">
 				<p style = "position: relative; top:-230px;">Apply Parameters to : </p>
-				<input style = "position: relative; top:-230px"; type="radio" name="hue" value="hsi"><br>
-  				<input style = "position: relative; top:-230px"; type="radio" name="saturation" value="cmy">
-  				<input style = "position: relative; top:-208px ;left: -24px"; type="radio" name="intensity" value="rgb">
+<form>
+				<input style = "position: relative; top:-230px"; type="checkbox" name="hue" value="hsi"><br>
+  				<input style = "position: relative; top:-230px"; type="checkbox" name="saturation" value="cmy">
+  				<input style = "position: relative; top:-208px ;left: -24px"; type="checkbox" name="intensity" value="rgb">
+
   				
   				<span class = "HSI" style = "position: relative; top:-250px; left: -25px"> Hue</span>
   				<span class = "HSI" style = "position: relative; top:-230px; left: -55px">Saturation</span>
@@ -212,29 +150,23 @@
    				<span class = "RGB" style = "position: relative; top:-250px; left: -22px">Red</span>
   				<span class = "RGB" style = "position: relative; top:-230px; left: -53px">Green</span>
   				<span class = "RGB" style = "position: relative; top:-208px; left: -95px">Blue</span>
+ </form>
 			</div>
 
-	</div>
-		<script>
-			
-			$(document).ready(function() {
-				$("#Processing").click(function() {
-				if(!document.getElementById('hsi').checked && !document.getElementById('cmy').checked && !document.getElementById('rgb').checked ){alert("Please Select the Parameters")}
-				else if(document.getElementById('hsi').checked){ $("#applyParam").show(); $('.HSI').show(); $('.CMY').hide();
-				$('.RGB').hide()}
-					else if(document.getElementById('cmy').checked){ $("#applyParam").show(); $('.CMY').show();$('.HSI').hide(); $('.RGB').hide()}
-					else if(document.getElementById('rgb').checked){ $("#applyParam").show(); $('.RGB').show();$('.CMY').hide();$('.HSI').hide()}
-				});
-			});
+			<div id = "lin_hist">
+				<button id = "Linear">Linear </button>
+				<button id = "Histogram"> Histogram</button> 
+			</div>
 
-			$(document).ready(function() {
-				$('#colorSpace').click(function() {
-					$('#applyParam').hide();
-				});
-			});
-	
-		</script>
-	<div id = "ioImages">
+
+	</div>
+			<div id = "ioHolder" style = "display:none">
+			<canvas id = "finalInput"></canvas>
+		<img id = "ip" style = "position:relative; width:250px; height: 250px; left: 170px; top: 130px">
+		<canvas id = "finalOutput"></canvas>
+	</div>
+
+	<div id = "ioImages" style="display: block">
 		<h3>Input Images</h3>
 		<div id = "inputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 600px; display:block">
 			<img id = "expandedImg" src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 250px; height: 250px;  display:block">
@@ -242,47 +174,8 @@
 			<img id = "greenPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 120px; height: 120px;  display:none">
 			<img id = "bluePlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 120px; width: 120px; height: 120px;  display:none">
 						<canvas id = "redCanvas" width = 250 height = 250 style= "position : relative; top: -236px; left: 400px;border: solid white 1px;"  ></canvas>
-									<canvas id = "greenCanvas" width = 250 height = 250  style= "position : relative; top: 60px;left: -228px;border: solid white 1px;"></canvas>
+			<canvas id = "greenCanvas" width = 250 height = 250  style= "position : relative; top: 60px;left: -228px;border: solid white 1px;"></canvas>
 			<canvas id = "blueCanvas" width = 250 height = 250  style= "position : relative; top: -196px;left: 400px;border: solid white 1px;"></canvas>
-
-			<script>
-
-document.getElementById("run").onclick = function() {
-  var c3 = document.getElementById("redCanvas");
-  var ctx3 = c3.getContext("2d");
-  var img = document.getElementById("expandedImg");
-  ctx3.drawImage(img, 0, 0);
-  var imgData = ctx3.getImageData(0, 0, c3.width, c3.height);
-  // invert colors
-  var i;
-  for (i = 0; i < imgData.data.length; i += 4) {
-    imgData.data[i] = 255
-  }
-  ctx3.putImageData(imgData, 0,0);
-    var c4 = document.getElementById("greenCanvas");
-  var ctx4 = c4.getContext("2d");
-  var img1 = document.getElementById("expandedImg");
-  ctx4.drawImage(img1, 0, 0);
-  var imgData1 = ctx4.getImageData(0, 0, c4.width, c4.height);
-  // invert colors
-  var i;
-  for (i = 0; i < imgData1.data.length; i += 4) {
-    imgData1.data[i + 1] = 255
-  }
-  ctx4.putImageData(imgData1, 0,0);
-    var c5 = document.getElementById("blueCanvas");
-  var ctx5 = c5.getContext("2d");
-  var img2 = document.getElementById("expandedImg");
-  ctx5.drawImage(img2, 0, 0);
-  var imgData2 = ctx5.getImageData(0, 0, c5.width, c5.height);
-  // invert colors
-  var i;
-  for (i = 0; i < imgData2.data.length; i += 4) {
-    imgData2.data[i + 2] = 255
-  }
-  ctx5.putImageData(imgData2, 0,0);
-};
-</script>
 
 		</div>
 
@@ -340,6 +233,7 @@ document.getElementById("run").onclick = function() {
 
 </div>
 
+<script src = "myScript.js"></script>
 
 
 
