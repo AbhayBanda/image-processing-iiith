@@ -34,7 +34,15 @@ border-radius: 5px;
 #buttons1:hover {
 background-color: #3e8e41;
 }
-
+#selectImg {
+position: relative;
+top:8px;
+border: solid blue 1px;
+border-radius: 5px;
+}
+#selectImg:hover {
+background-color: #3e8e41;
+}
 #run {
 position: relative;
 top:8px;
@@ -117,7 +125,7 @@ display: none;
 <canvas id = "inputCanvas"></canvas>
 
 
-<button id = "buttons1" onclick="showDiv();">Select Image</button>
+<button id = "selectImg" onclick="showDiv();">Select Image</button>
 <button id = "buttons1" onClick="window.location.reload();">Reset</button>
 <button id = "run" onclick = "hideInst();showInst1(); colorPlanes();">Run</button>
 <div class="btn-group2">

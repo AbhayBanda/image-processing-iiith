@@ -6,7 +6,7 @@ expandImg.src = imgs.src;
 expandIPImg.src = imgs.src;
 expandImg.parentElement.style.display = "block";
 expandIPImg.parentElement.style.display = "block";
-
+$("#ioHolder").hide();
 
 }
 function showDiv() {
@@ -71,13 +71,21 @@ $(document).ready(function() {
 		else if(document.getElementById('cmy').checked){ $("#applyParam").show(); $('.CMY').show();$('.HSI').hide(); $('.RGB').hide(); $("#ioImages").hide();}
 		else if(document.getElementById('rgb').checked){ $("#applyParam").show(); $('.RGB').show();$('.CMY').hide();$('.HSI').hide();$("#ioImages").hide();}
 		$("#ioHolder").show();
-		$("ioImages").hide();
+		$("#ioImages").hide();
 });
 });
 
 
 $(document).ready(function() {
 	$('#colorSpace').click(function() {
+		$("#ioHolder").hide();
+		$('#applyParam').hide();
+		$("#ioImages").show();
+});
+});
+
+$(document).ready(function() {
+	$('#selectImg').click(function() {
 		$("#ioHolder").hide();
 		$('#applyParam').hide();
 		$("#ioImages").show();
@@ -105,7 +113,7 @@ canvas3.style.top = "150px";
 
 
 document.getElementById("run").onclick = function() {
-	
+
 	var c3 = document.getElementById("redCanvas");
 	var ctx3 = c3.getContext("2d");
 	var img = document.getElementById("expandedImg");
