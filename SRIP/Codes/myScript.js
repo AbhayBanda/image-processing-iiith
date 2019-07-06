@@ -72,6 +72,9 @@ $(document).ready(function() {
 		else if(document.getElementById('rgb').checked){ $("#applyParam").show(); $('.RGB').show();$('.CMY').hide();$('.HSI').hide();$("#ioImages").hide();}
 		$("#ioHolder").show();
 		$("#ioImages").hide();
+		$("#linear").show();
+		$("#histogram").show();
+
 });
 });
 
@@ -81,6 +84,10 @@ $(document).ready(function() {
 		$("#ioHolder").hide();
 		$('#applyParam').hide();
 		$("#ioImages").show();
+		$("#linear").hide();
+		$("#histogram").hide();
+		$("#linearfunction").hide();
+		$('#graph').hide();
 });
 });
 
@@ -94,22 +101,22 @@ $(document).ready(function() {
 
 var canvas2 = document.getElementById("finalInput");
 var ctx2 = canvas2.getContext("2d");
-canvas2.style.border = "solid blue 2px";
+canvas2.style.border = "solid blue 3px";
 canvas2.style.width = "300px";
 canvas2.style.height = "300px";
 canvas2.style.position = "relative";
 canvas2.style.left = "450px";
-canvas2.style.top = "150px";
+canvas2.style.top = "130px";
 
 
 var canvas3 = document.getElementById("finalOutput");
 var ctx3 = canvas3.getContext("2d");
-canvas3.style.border = "solid blue 2px";
+canvas3.style.border = "solid blue 3px";
 canvas3.style.width = "300px";
 canvas3.style.height = "300px";
 canvas3.style.position = "relative";
 canvas3.style.left = "225px";
-canvas3.style.top = "150px";
+canvas3.style.top = "130px";
 
 
 document.getElementById("run").onclick = function() {
@@ -150,3 +157,59 @@ document.getElementById("run").onclick = function() {
 	}
 	ctx5.putImageData(imgData2, 0,0);
 };
+
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("slope");
+output.innerHTML = slider.value;
+slider.oninput = function() {
+	reloadDiv();
+  output.innerHTML = this.value;
+  document.getElementById("eqnslope").innerHTML = slider.value + " r + " + slider2.value;
+    drawGraph(slider.value,slider2.value);
+    
+
+}
+
+var slider2 = document.getElementById("myOffsetRange");
+var output2 = document.getElementById("offset");
+output2.innerHTML = slider2.value; 
+
+slider2.oninput = function() {
+	reloadDiv();
+  output2.innerHTML = this.value;
+  document.getElementById("eqnslope").innerHTML = slider.value + " r + " + slider2.value;
+  drawGraph(slider.value,slider2.value);
+  
+}
+
+
+$(document).ready(function() {
+	$("#linear").click(function(){
+		$("#linearfunction").show();
+		$("#graph").show();
+	});
+});
+
+function reloadDiv()
+{ 
+    $( "#graph" ).load(window.location.href + "#graph" );
+}
+
+function drawGraph(m, c) {
+
+	var graphs = document.getElementById("graph");
+	graphs.style.width = "225px";
+	graphs.style.height = "225px"
+	var graphctx = graphs.getContext('2d');
+
+	var x_coordinate = 225-c/m;
+	var y_coordinate = 225-c;
+
+	graphctx.beginPath();
+
+	graphctx.moveTo(x_coordinate, 0);
+	graphctx.lineTo(0, y_coordinate );
+	graphctx.strokeStyle = "white";
+	graphctx.stroke();
+}
