@@ -102,20 +102,20 @@ $(document).ready(function() {
 var canvas2 = document.getElementById("finalInput");
 var ctx2 = canvas2.getContext("2d");
 canvas2.style.border = "solid blue 3px";
-canvas2.style.width = "300px";
-canvas2.style.height = "300px";
+canvas2.style.width = "150px";
+canvas2.style.height = "150px";
 canvas2.style.position = "relative";
-canvas2.style.left = "450px";
+canvas2.style.left = "550px";
 canvas2.style.top = "130px";
 
 
 var canvas3 = document.getElementById("finalOutput");
 var ctx3 = canvas3.getContext("2d");
 canvas3.style.border = "solid blue 3px";
-canvas3.style.width = "300px";
-canvas3.style.height = "300px";
+canvas3.style.width = "150px";
+canvas3.style.height = "150px";
 canvas3.style.position = "relative";
-canvas3.style.left = "225px";
+canvas3.style.left = "450px";
 canvas3.style.top = "130px";
 
 
@@ -156,6 +156,19 @@ document.getElementById("run").onclick = function() {
 	imgData2.data[i + 2] = 255
 	}
 	ctx5.putImageData(imgData2, 0,0);
+
+
+	/*var c6 = document.getElementById("finalOutput");
+	var ctx6 = c6.getContext("2d");
+	var img6 = document.getElementById("expandedImg");
+	ctx6.drawImage(img6, 0, 0);
+	var imgData6 = ctx6.getImageData(0, 0, c6.width, c6.height);
+	var i;
+	if(slider2.value<0) slider2.value = -1 * slider2.value;
+	for (i = 0; i < imgData6.data.length; i += 4) {
+	imgData6.data[i] = slider2.value;
+	}
+	ctx6.putImageData(imgData6, 0,0);*/
 };
 
 
@@ -163,10 +176,10 @@ var slider = document.getElementById("myRange");
 var output = document.getElementById("slope");
 output.innerHTML = slider.value;
 slider.oninput = function() {
-	reloadDiv();
+	//reloadDiv();
   output.innerHTML = this.value;
   document.getElementById("eqnslope").innerHTML = slider.value + " r + " + slider2.value;
-    drawGraph(slider.value,slider2.value);
+   // drawGraph(slider.value,slider2.value);
     
 
 }
@@ -176,10 +189,10 @@ var output2 = document.getElementById("offset");
 output2.innerHTML = slider2.value; 
 
 slider2.oninput = function() {
-	reloadDiv();
+	//reloadDiv();
   output2.innerHTML = this.value;
   document.getElementById("eqnslope").innerHTML = slider.value + " r + " + slider2.value;
-  drawGraph(slider.value,slider2.value);
+ // drawGraph(slider.value,slider2.value);
   
 }
 
@@ -187,11 +200,11 @@ slider2.oninput = function() {
 $(document).ready(function() {
 	$("#linear").click(function(){
 		$("#linearfunction").show();
-		$("#graph").show();
+		//$("#graph").show();
 	});
 });
 
-function reloadDiv()
+/*function reloadDiv()
 { 
     $( "#graph" ).load(window.location.href + "#graph" );
 }
@@ -212,4 +225,100 @@ function drawGraph(m, c) {
 	graphctx.lineTo(0, y_coordinate );
 	graphctx.strokeStyle = "white";
 	graphctx.stroke();
-}
+}*/
+$(document).ready(function() {
+	$("#run").click(function(){
+var c6 = document.getElementById("finalOutput");
+	var ctx6 = c6.getContext("2d");
+	var img6 = document.getElementById("expandedImg");
+	ctx6.drawImage(img6, 0, 0);
+	var imgData6 = ctx6.getImageData(0, 0, c6.width, c6.height);
+	//ctx6.putImageData(imgData6, 0,0);
+	if(document.getElementById('hsi').checked) {
+			if(document.getElementById('hcr').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+					for (i = 0; i < imgData6.data.length; i += 4) {
+					imgData6.data[i] = slider2.value;
+					}
+					ctx6.putImageData(imgData6, 0,0);
+			}
+			if(document.getElementById('smg').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i] = slider2.value;
+				}
+				ctx6.putImageData(imgData6, 0,0);
+			}
+			if(document.getElementById('iyb').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i] = slider2.value;
+				}	
+				ctx6.putImageData(imgData6, 0,0);
+			}
+
+			}
+
+
+
+
+	else if(document.getElementById('cmy').checked) {
+			if(document.getElementById('hcr').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+					for (i = 0; i < imgData6.data.length; i += 4) {
+					imgData6.data[i] = 1- slider2.value;
+					}
+					ctx6.putImageData(imgData6, 0,0);
+			}
+			if(document.getElementById('smg').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i + 1] = 1 - slider2.value;
+				}
+				//imgData6.data[i + 1] = 1 - imgData6.data[i + 1];
+				ctx6.putImageData(imgData6, 0,0);
+			}
+			if(document.getElementById('iyb').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i + 2] = 1 - slider2.value;
+				}	
+				//imgData6.data[i + 2] = 1 - imgData6.data[i + 2];
+				ctx6.putImageData(imgData6, 0,0);
+			}
+	}
+	else if(document.getElementById('rgb').checked) {
+			if(document.getElementById('hcr').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+					for (i = 0; i < imgData6.data.length; i += 4) {
+					imgData6.data[i] = slider2.value;
+					}
+					ctx6.putImageData(imgData6, 0,0);
+			}
+			if(document.getElementById('smg').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i + 1] = slider2.value;
+				}
+				ctx6.putImageData(imgData6, 0,0);
+			}
+			if(document.getElementById('iyb').checked) {
+				var i;
+				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i + 2] = slider2.value;
+				}	
+				ctx6.putImageData(imgData6, 0,0);
+			}
+			
+	}
+	});
+});

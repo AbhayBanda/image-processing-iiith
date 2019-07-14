@@ -203,9 +203,9 @@ display: none;
 <div id = "applyParam" style = "display: none; position:relative; top:-300px">
 <p style = "position: relative; top:-230px;">Apply Parameters to : </p>
 <form>
-<input style = "position: relative; top:-230px"; type="checkbox" name="hue" value="hsi"><br>
-<input style = "position: relative; top:-230px"; type="checkbox" name="saturation" value="cmy">
-<input style = "position: relative; top:-208px ;left: -24px"; type="checkbox" name="intensity" value="rgb">
+<input style = "position: relative; top:-230px"; type="checkbox" name="hue" id="hcr"><br>
+<input style = "position: relative; top:-230px"; type="checkbox" name="saturation" id="smg">
+<input style = "position: relative; top:-208px ;left: -24px"; type="checkbox" name="intensity" id="iyb">
 
 
 <span class = "HSI" style = "position: relative; top:-250px; left: -25px"> Hue</span>
@@ -238,30 +238,28 @@ display: none;
 
 	Offset (c): <p id = "offset" style =  "font-size: 15px; position: relative; top: -33px; left: 75px;"></p>
 	<div class="slidecontainer">
-   		<input type="range" value="0" step="0.1" min="-57.3" max="57.3" class = "slider" id = "myOffsetRange">
+   		<input type="range" value="0" step="0.1" min="-225" max="225" class = "slider" id = "myOffsetRange">
 	</div>
 
-   	<canvas id = "graph" style="border:1px solid #d3d3d3";>
-		</canvas>
 </div>
 
 </div>
 <div id = "ioHolder" style = "display:none">
 <canvas id = "finalInput"></canvas>
-<img id = "ip" style = "position:relative; width:250px; height: 250px; left: 170px; top: 100px">
-<canvas id = "finalOutput"></canvas>
+<img id = "ip" style = "position:relative; width:150px; height: 150px; left: 393px; top: 128px">
+<canvas id = "finalOutput" width = 150 height = 150 style = "position : relative;  top: 450px; left:130px;border: solid blue 3px;"></canvas>
 </div>
 
 <div id = "ioImages" style="display: block">
 <h3>Input Images</h3>
-<div id = "inputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 600px; display:block">
-<img id = "expandedImg" src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 250px; height: 250px;  display:block">
-<img id = "redPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 120px; height: 120px;  display:none">
-<img id = "greenPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 120px; height: 120px;  display:none">
-<img id = "bluePlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 120px; width: 120px; height: 120px;  display:none">
-<canvas id = "redCanvas" width = 250 height = 250 style= "position : relative; top: -236px; left: 400px;border: solid white 1px;"  ></canvas>
-<canvas id = "greenCanvas" width = 250 height = 250  style= "position : relative; top: 60px;left: -228px;border: solid white 1px;"></canvas>
-<canvas id = "blueCanvas" width = 250 height = 250  style= "position : relative; top: -196px;left: 400px;border: solid white 1px;"></canvas>
+<div id = "inputHolder" style = "border: solid red 2px ;position: relative width: 600px; height: 200px; display:block">
+<img id = "expandedImg" src="images/Layer-4.jpg" style= " position : relative; top: 15px;left: 30px; width: 150px; height: 150px;  display:block">
+<img id = "redPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px; left: 60px; width: 150px; height: 150px;  display:none">
+<img id = "greenPlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 90px; width: 200px; height: 200px;  display:none">
+<img id = "bluePlane" src="images/Layer-4.jpg" style= "position : relative; top: 15px;left: 120px; width: 200px; height: 200px;  display:none">
+<canvas id = "redCanvas" width = 150 height = 150 style= "position : relative;top: -135px; left:200px; ;border: solid white 1px;"  ></canvas>
+<canvas id = "greenCanvas" width = 150 height = 150  style= "position : relative; top: -135px; left:200px;border: solid white 1px;"></canvas>
+<canvas id = "blueCanvas" width = 150 height = 150  style= "position : relative;  top: -135px; left:200px;border: solid white 1px;"></canvas>
 
 </div>
 
