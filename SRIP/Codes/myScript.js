@@ -1,6 +1,11 @@
 $(document).ready(function() {
 	$("#selectImage").click(function(){
 		$("#imageGrid").show()
+
+				$("#opScript").show();
+				$("#opimagePlanes1").show();
+		
+
 	});
 });
 
@@ -29,7 +34,9 @@ $("#io").hide();
 
 $(document).ready(function(){
 	$("#Run").click(function(){
-
+    $("#HSI").prop( "checked", false );
+    $("#CMY").prop( "checked", false );
+    $("#YCrCb").prop("checked", false);
 	var c3 = document.getElementById("redCanvas");
 	var ctx3 = c3.getContext("2d");
 	var img = document.getElementById("inputImage");
@@ -76,33 +83,35 @@ $(document).ready(function(){
 
 $(document).ready(function() {
 	$("#Processing").click(function(){
-	
-
-	
-		var c = document.getElementById("colorSpacingBox");
-		c.style.height = "200px";
-		if(!document.getElementById('HSI').checked && !document.getElementById('CMY').checked && !document.getElementById('YCrCb').checked ){alert("Please Select the Parameters")}
-		else if(document.getElementById("HSI").checked)
+	$("#ipScript").hide();
+	$("#imagePlanes").hide();
+	$("#linearfunction").hide();
+	$("#processingButtons").show();
+	$("#colorSpacingButtons").hide();
+	$("#opimagePlanes1").hide();
+	$("#opimagePlanes2").hide();
+	$("#opimagePlanes3").hide();
+	$("#opScript").hide();
+		//if(!document.getElementById('HSI').checked && !document.getElementById('CMY').checked && !document.getElementById('RGB').checked ){alert("Please Select the Parameters")}
+		 if(document.getElementById("HSI1").checked)
 		{
 				$("#parameters1").show();
 				$("#parameters2").hide();
 				$("#parameters3").hide();
 				$("#parameters").show();
 				$("#io").show();
-				$("#ipScript").hide();
-				$("#imagePlanes").hide();
-				$("#linearfunction").hide();
+						var c = document.getElementById("colorSpacingBox");
+		c.style.height = "200px";
 		}
-		else if (document.getElementById("CMY").checked)
+		else if (document.getElementById("CMY1").checked)
 		{
 				$("#parameters").show();
 				$("#parameters1").hide();
 				$("#parameters2").show();
 				$("#parameters3").hide();
 				$("#io").show();
-				$("#ipScript").hide();
-				$("#imagePlanes").hide();
-				$("#linearfunction").hide();
+						var c = document.getElementById("colorSpacingBox");
+		c.style.height = "200px";
 		}
 		else 
 		{
@@ -111,9 +120,8 @@ $(document).ready(function() {
 				$("#parameters2").hide();
 				$("#parameters3").show();
 				$("#io").show();
-				$("#ipScript").hide();
-				$("#imagePlanes").hide();
-				$("#linearfunction").hide();
+						var c = document.getElementById("colorSpacingBox");
+		c.style.height = "200px";
 		}
 	});
 });
@@ -133,9 +141,31 @@ $(document).ready(function(){
 	$("#ColorSpacing").click(function() {
 		$("#parameters").hide();
 		$("#imagePlanes").show();
+		$("#processingButtons").hide();
+		$("#colorSpacingButtons").show();
+		$("#io").hide();
 		$("#ipScript").show();
 			var c = document.getElementById("colorSpacingBox");
 			c.style.height = "125px";
+		if(document.getElementById("HSI").checked)
+		{		$("#opScript").show();
+				$("#opimagePlanes1").show();
+				$("#opimagePlanes2").hide();
+				$("#opimagePlanes2").hide();
+		}
+		else if(document.getElementById("CMY").checked)
+		{
+				$("#opScript").show();
+				$("#opimagePlanes2").show();
+				$("#opimagePlanes1").hide();
+				$("#opimagePlanes3").hide();
+		}
+		else {
+				$("#opScript").show();
+				$("#opimagePlanes3").show();
+				$("#opimagePlanes1").hide();
+				$("#opimagePlanes2").hide();
+		}
 	});
 });
 
@@ -187,26 +217,112 @@ $(document).ready(function() {
 	var img6 = document.getElementById("inputImage");
 	ctx6.drawImage(img6, 0, 0);
 	var imgData6 = ctx6.getImageData(0, 0, c6.width, c6.height);
+
 	if(document.getElementById('HSI').checked) {
+			$("#opimagePlanes1").show();
+			$("#opimagePlanes2").hide();
+			$("#opimagePlanes3").hide();
+
+	var c10 = document.getElementById("hueCanvas");
+	var ctx10 = c10.getContext("2d");
+	var img10 = document.getElementById("inputImage");
+	ctx10.drawImage(img10, 0, 0);
+	var imgData10 = ctx10.getImageData(0, 0, c10.width, c10.height);
+	ctx10.putImageData(imgData10, 0,0);
+	document.getElementById("hueCanvas").style.filter  = "hue-rotate(100deg)";
+	var c11 = document.getElementById("saturationCanvas");
+	var ctx11 = c11.getContext("2d");
+	var img11 = document.getElementById("inputImage");
+	ctx11.drawImage(img11, 0, 0);
+	var imgData11 = ctx11.getImageData(0, 0, c11.width, c11.height);
+	ctx11.putImageData(imgData11, 0,0);
+	document.getElementById("saturationCanvas").style.filter  = "saturate(10%)";
+    			var c12 = document.getElementById("intensityCanvas");
+	var ctx12 = c12.getContext("2d");
+	var img12 = document.getElementById("inputImage");
+	ctx12.drawImage(img12, 0, 0);
+	var imgData12 = ctx12.getImageData(0, 0, c12.width, c12.height);
+	var i, intensity = 0;
+	for (i = 0; i < imgData12.data.length; i += 4) {
+		    imgData12.data[i] = imgData12.data[i]/3;
+		    imgData12.data[i + 1] = imgData12.data[i + 1]/3 ;
+		    imgData12.data[i + 2]  = imgData12.data[i + 2]/3;
+		    
+	}
+
+	ctx12.putImageData(imgData12, 0,0);
+
+
+	}
+		if(document.getElementById('CMY').checked) {
+			$("#opimagePlanes2").show();
+			$("#opimagePlanes1").hide();
+			$("#opimagePlanes3").hide();
+
+			var c7 = document.getElementById("cyanCanvas");
+	var ctx7 = c7.getContext("2d");
+	var img7 = document.getElementById("inputImage");
+	ctx7.drawImage(img7, 0, 0);
+	var imgData7 = ctx7.getImageData(0, 0, c7.width, c7.height);
+	// invert colors
+	var i;
+	for (i = 0; i < imgData7.data.length; i += 4) {
+		    imgData7.data[i] = 0;
+
+	}
+	ctx7.putImageData(imgData7, 0,0);
+				var c8 = document.getElementById("magentaCanvas");
+	var ctx8 = c8.getContext("2d");
+	var img8 = document.getElementById("inputImage");
+	ctx8.drawImage(img8, 0, 0);
+	var imgData8 = ctx8.getImageData(0, 0, c8.width, c8.height);
+	// invert colors
+	var i;
+	for (i = 0; i < imgData8.data.length; i += 4) {
+		    imgData8.data[i + 1] = 0;
+	}
+	ctx8.putImageData(imgData8, 0,0);
+				var c9 = document.getElementById("yellowCanvas");
+	var ctx9 = c9.getContext("2d");
+	var img9 = document.getElementById("inputImage");
+	ctx9.drawImage(img9, 0, 0);
+	var imgData9 = ctx9.getImageData(0, 0, c9.width, c9.height);
+	// invert colors
+	var i;
+	for (i = 0; i < imgData9.data.length; i += 4) {
+			imgData9.data[i + 2] = 0; 
+	}
+	ctx9.putImageData(imgData9, 0,0);
+	}
+		if(document.getElementById('YCrCb').checked) {
+			$("#opimagePlanes3").show();
+			$("#opimagePlanes1").hide();
+			$("#opimagePlanes2").hide();
+	}
+
+
+	if(document.getElementById('HSI1').checked) {
 			if(document.getElementById('Hue').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+			//	if(slider2.value<0) slider2.value = -1 * slider2.value;
 					for (i = 0; i < imgData6.data.length; i += 4) {
 					imgData6.data[i + 3] = slider.value;
 					}
-					ctx6.putImageData(imgData6, 0,0);
+					 
+					
 			}
 			if(document.getElementById('Saturation').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+			//	if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
 				imgData6.data[i] = slider2.value;
 				}
-				ctx6.putImageData(imgData6, 0,0);
+				document.getElementById("finalOutput").style.filter = "saturate(50%)";
+			//	ctx6.putImageData(imgData6, 0,0);
 			}
 			if(document.getElementById('Intensity').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
 				imgData6.data[i] = slider2.value;
 				}	
@@ -216,66 +332,64 @@ $(document).ready(function() {
 			}
 
 
-	else if(document.getElementById('CMY').checked) {
+	if(document.getElementById('CMY1').checked) {
 			if(document.getElementById('Cyan').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 					for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i + 1] = slider2.value;
-					imgData6.data[i + 2] = slider2.value;
+					imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
+					imgData6.data[i + 2] = imgData6.data[i + 2] * slider.value + slider2.value;
 					}
 					ctx6.putImageData(imgData6, 0,0);
 			}
 			if(document.getElementById('Magenta').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] = slider2.value;
-					imgData6.data[i + 2] = slider2.value;
+					imgData6.data[i] = imgData6.data[i] * slider.value + slider2.value;
+					imgData6.data[i + 2] = imgData6.data[i + 2] * slider.value + slider2.value;
 				}
 				//imgData6.data[i + 1] = 1 - imgData6.data[i + 1];
 				ctx6.putImageData(imgData6, 0,0);
 			}
 			if(document.getElementById('Yellow').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] = slider2.value;
-					imgData6.data[i + 1] = slider2.value;
+					imgData6.data[i] = imgData6.data[i] * slider.value + slider2.value;
+					imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
 				}	
 				//imgData6.data[i + 2] = 1 - imgData6.data[i + 2];
 				ctx6.putImageData(imgData6, 0,0);
 			}
 	}
-	else if(document.getElementById('YCrCb').checked) {
+	if(document.getElementById('RGB').checked) {
 			if(document.getElementById('Red').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 					for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] =  slider2.value;
+					imgData6.data[i] =  imgData6.data[i] * slider.value + slider2.value;
 					}
 					ctx6.putImageData(imgData6, 0,0);
 			}
 			if(document.getElementById('Green').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i + 1] = slider2.value;
+					imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
 				}
 				ctx6.putImageData(imgData6, 0,0);
 			}
 			if(document.getElementById('Blue').checked) {
 				var i;
-				if(slider2.value<0) slider2.value = -1 * slider2.value;
+				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i + 2] = slider2.value;
+					imgData6.data[i + 2] = imgData6.data[i + 2] * slider.value + slider2.value;
 				}	
 				ctx6.putImageData(imgData6, 0,0);
 			}
 			
 	}
-
-
 	});
 });
 
