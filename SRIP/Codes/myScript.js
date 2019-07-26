@@ -4,7 +4,6 @@ $(document).ready(function() {
 
 				$("#opScript").show();
 				$("#opimagePlanes1").show();
-		
 
 	});
 });
@@ -34,9 +33,6 @@ $("#io").hide();
 
 $(document).ready(function(){
 	$("#Run").click(function(){
-    $("#HSI").prop( "checked", false );
-    $("#CMY").prop( "checked", false );
-    $("#YCrCb").prop("checked", false);
 	var c3 = document.getElementById("redCanvas");
 	var ctx3 = c3.getContext("2d");
 	var img = document.getElementById("inputImage");
@@ -92,6 +88,9 @@ $(document).ready(function() {
 	$("#opimagePlanes2").hide();
 	$("#opimagePlanes3").hide();
 	$("#opScript").hide();
+	    $("#HSI").prop( "checked", false );
+    $("#CMY").prop( "checked", false );
+    $("#YCrCb").prop("checked", false);
 		//if(!document.getElementById('HSI').checked && !document.getElementById('CMY').checked && !document.getElementById('RGB').checked ){alert("Please Select the Parameters")}
 		 if(document.getElementById("HSI1").checked)
 		{
@@ -176,7 +175,6 @@ slider.oninput = function() {
   output.innerHTML = this.value;
   document.getElementById("eqnslope").innerHTML = slider.value + " r + " + slider2.value;
     
-
 }
 
 var slider2 = document.getElementById("myOffsetRange");
@@ -306,7 +304,9 @@ $(document).ready(function() {
 				var i;
 			//	if(slider2.value<0) slider2.value = -1 * slider2.value;
 					for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i + 3] = slider.value;
+					imgData6.data[i] = Math.max(imgData6.data[i],imgData6.data[i + 1],imgData6.data[i + 2] )
+					imgData6.data[i + 1] = Math.max(imgData6.data[i],imgData6.data[i + 1],imgData6.data[i + 2] )
+					imgData6.data[i + 2] = Math.max(imgData6.data[i],imgData6.data[i + 1],imgData6.data[i + 2] )
 					}
 					 
 					
@@ -324,7 +324,9 @@ $(document).ready(function() {
 				var i;
 				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-				imgData6.data[i] = slider2.value;
+					imgData6.data[i] = imgData6.data[i]/3;
+					imgData6.data[i + 1] = imgData6.data[i + 1] /3;
+					imgData6.data[i + 2] = imgData6.data[i + 2]/3;
 				}	
 				ctx6.putImageData(imgData6, 0,0);
 			}
