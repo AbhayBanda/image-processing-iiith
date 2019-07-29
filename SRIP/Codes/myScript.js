@@ -5,6 +5,7 @@ $(document).ready(function() {
 				$("#opScript").show();
 				$("#opimagePlanes1").show();
 
+
 	});
 });
 
@@ -133,6 +134,21 @@ $(document).ready(function(){
 		$("#ipScript").show();
 			var c = document.getElementById("colorSpacingBox");
 			c.style.height = "125px"
+			if(document.getElementById("HSI").checked){
+				$("#opimagePlanes3").hide();
+				$("#opimagePlanes2").hide();
+				$("#opimagePlanes1").show();
+			}
+			if(document.getElementById("CMY").checked){
+				$("#opimagePlanes3").hide();
+				$("#opimagePlanes1").hide();
+				$("#opimagePlanes2").show();
+			}
+			else {
+				$("#opimagePlanes1").hide();
+				$("#opimagePlanes2").hide();
+				$("#opimagePlanes1").show();
+			}
 
 	});
 });
@@ -242,9 +258,9 @@ $(document).ready(function() {
 	var imgData12 = ctx12.getImageData(0, 0, c12.width, c12.height);
 	var i, intensity = 0;
 	for (i = 0; i < imgData12.data.length; i += 4) {
-		    imgData12.data[i] = imgData12.data[i]/3;
-		    imgData12.data[i + 1] = imgData12.data[i + 1]/3 ;
-		    imgData12.data[i + 2]  = imgData12.data[i + 2]/3;
+		    imgData12.data[i] = 0.299*imgData12.data[i];
+		    imgData12.data[i + 1] = 0.587*imgData12.data[i + 1] ;
+		    imgData12.data[i + 2]  = 0.144*imgData12.data[i + 2];
 		    
 	}
 
@@ -296,37 +312,88 @@ $(document).ready(function() {
 			$("#opimagePlanes3").show();
 			$("#opimagePlanes1").hide();
 			$("#opimagePlanes2").hide();
+							var c10 = document.getElementById("luminanceCanvas");
+	var ctx10 = c10.getContext("2d");
+	var img10 = document.getElementById("inputImage");
+	ctx10.drawImage(img10, 0, 0);
+	var imgData10 = ctx10.getImageData(0, 0, c10.width, c10.height);
+	// invert colors
+	var i;
+	for (i = 0; i < imgData10.data.length; i += 4) {
+			
+			imgData10.data[i] =  16/3 + (65.378/256)*imgData10.data[i];
+			imgData10.data[i + 1] =16/3 +  (129.057/256)*imgData10.data[i + 1];
+			imgData10.data[i + 2] = 16/3 +(25.064/256)*imgData10.data[i + 2];
+
 	}
+	ctx10.putImageData(imgData10, 0,0);
+	
+			var c11 = document.getElementById("CbCanvas");
+	var ctx11 = c11.getContext("2d");
+	var img11 = document.getElementById("inputImage");
+	ctx11.drawImage(img11, 0, 0);
+	var imgData11 = ctx11.getImageData(0, 0, c11.width, c11.height);
+	// invert colors
+	var i;
+	for (i = 0; i < imgData11.data.length; i += 4) {
+			
+			imgData11.data[i] =  128/3 - (37.945/256)*imgData11.data[i];
+			imgData11.data[i + 1] =128/3 -  (74.494/256)*imgData11.data[i + 1];
+			imgData11.data[i + 2] = 128/3 + (112.439/256)*imgData11.data[i + 2];
+
+	}
+	ctx11.putImageData(imgData11, 0,0);
+	
+	 var c12 = document.getElementById("CrCanvas");
+	var ctx12 = c12.getContext("2d");
+	var img12 = document.getElementById("inputImage");
+	ctx12.drawImage(img12, 0, 0);
+	var imgData12 = ctx12.getImageData(0, 0, c12.width, c12.height);
+	// invert colors
+	var i;
+	for (i = 0; i < imgData12.data.length; i += 4) {
+			
+			imgData12.data[i] =  128/3 + (112.439/256)*imgData12.data[i];
+			imgData12.data[i + 1] =128/3 - (94.154/256)*imgData12.data[i + 1];
+			imgData12.data[i + 2] = 128/3 - (18.285/256)*imgData12.data[i + 2];
+
+	}
+	ctx12.putImageData(imgData12, 0,0);
+	
+}
 
 
 	if(document.getElementById('HSI1').checked) {
 			if(document.getElementById('Hue').checked) {
 				var i;
-			//	if(slider2.value<0) slider2.value = -1 * slider2.value;
-					for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] = Math.max(imgData6.data[i],imgData6.data[i + 1],imgData6.data[i + 2] )
-					imgData6.data[i + 1] = Math.max(imgData6.data[i],imgData6.data[i + 1],imgData6.data[i + 2] )
-					imgData6.data[i + 2] = Math.max(imgData6.data[i],imgData6.data[i + 1],imgData6.data[i + 2] )
-					}
+			for (i = 0; i < imgData6.data.length; i += 4) {
+				imgData6.data[i] = imgData6.data[i] * slider.value + slider2.value;
+				imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
+				imgData6.data[i + 2] = imgData6.data[i + 2] + slider.value + slider2.value;
+				}
+			ctx6.putImageData(imgData6, 0,0);
+			document.getElementById("finalOutput").style.filter  = "hue-rotate(90deg)","hue-rotate(180deg)";
 					 
 					
 			}
 			if(document.getElementById('Saturation').checked) {
 				var i;
-			//	if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-				imgData6.data[i] = slider2.value;
+				imgData6.data[i] = imgData6.data[i] * slider.value + slider2.value;
+				imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
+				imgData6.data[i + 2] = imgData6.data[i + 2] + slider.value + slider2.value;
 				}
-				document.getElementById("finalOutput").style.filter = "saturate(50%)";
-			//	ctx6.putImageData(imgData6, 0,0);
+			ctx6.putImageData(imgData6, 0,0);
+				document.getElementById("finalOutput").style.filter = "saturate(8)";
+			
 			}
 			if(document.getElementById('Intensity').checked) {
 				var i;
 				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] = imgData6.data[i]/3;
-					imgData6.data[i + 1] = imgData6.data[i + 1] /3;
-					imgData6.data[i + 2] = imgData6.data[i + 2]/3;
+					imgData6.data[i] = (imgData6.data[i]*slider.value + slider2.value)/3;
+					imgData6.data[i + 1] = (imgData6.data[i + 1]*slider.value + slider2.value) /3;
+					imgData6.data[i + 2] = (imgData6.data[i + 2]*slider.value + slider2.value)/3;
 				}	
 				ctx6.putImageData(imgData6, 0,0);
 			}
@@ -339,8 +406,8 @@ $(document).ready(function() {
 				var i;
 				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 					for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
-					imgData6.data[i + 2] = imgData6.data[i + 2] * slider.value + slider2.value;
+							imgData6.data[i] = 1 - imgData6.data[i];
+							imgData6.data[i] = imgData6.data[i]*slider.value + slider2.value
 					}
 					ctx6.putImageData(imgData6, 0,0);
 			}
@@ -348,8 +415,8 @@ $(document).ready(function() {
 				var i;
 				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] = imgData6.data[i] * slider.value + slider2.value;
-					imgData6.data[i + 2] = imgData6.data[i + 2] * slider.value + slider2.value;
+							imgData6.data[i + 1] = 1 - imgData6.data[i + 1];
+							imgData6.data[i + 1] = imgData6.data[i + 1]*slider.value + slider2.value;
 				}
 				//imgData6.data[i + 1] = 1 - imgData6.data[i + 1];
 				ctx6.putImageData(imgData6, 0,0);
@@ -358,8 +425,8 @@ $(document).ready(function() {
 				var i;
 				//if(slider2.value<0) slider2.value = -1 * slider2.value;
 				for (i = 0; i < imgData6.data.length; i += 4) {
-					imgData6.data[i] = imgData6.data[i] * slider.value + slider2.value;
-					imgData6.data[i + 1] = imgData6.data[i + 1] * slider.value + slider2.value;
+							imgData6.data[i + 2] = 1 - imgData6.data[i + 2];
+							imgData6.data[i + 2] = imgData6.data[i + 2]*slider.value + slider2.value
 				}	
 				//imgData6.data[i + 2] = 1 - imgData6.data[i + 2];
 				ctx6.putImageData(imgData6, 0,0);
