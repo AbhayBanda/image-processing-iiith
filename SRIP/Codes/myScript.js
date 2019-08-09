@@ -4,8 +4,6 @@ $(document).ready(function() {
 
 				$("#opScript").show();
 				$("#opimagePlanes1").show();
-
-
 	});
 });
 
@@ -256,7 +254,7 @@ $(document).ready(function() {
 	var img12 = document.getElementById("inputImage");
 	ctx12.drawImage(img12, 0, 0);
 	var imgData12 = ctx12.getImageData(0, 0, c12.width, c12.height);
-	var i, intensity = 0;
+	var intensity = 0;
 	for (i = 0; i < imgData12.data.length; i += 4) {
 		    imgData12.data[i] = 0.299*imgData12.data[i];
 		    imgData12.data[i + 1] = 0.587*imgData12.data[i + 1] ;

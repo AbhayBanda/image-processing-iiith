@@ -5,6 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
   <title>Color Image Processing</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+        <script>
+            
+        </script>
   <style>
     body {
       color: #c2c2c2;
@@ -25,14 +29,14 @@
 
     }
     #instructionBox {
-      border: 1px dashed #c2c2c2;
+      border: 1px solid #c2c2c2;
       width:300px;
       height: 55px;
       position: relative;
       left:-350px;
     }
     #instructionBox2 {
-      border: 1px dashed #c2c2c2;
+      border: 1px solid #c2c2c2;
       width:300px;
       height: 50px;
       position: relative;
@@ -44,15 +48,19 @@
       left:-400px;
       top:10px;
     }
+
     #buttons2 {
+     
       position: relative;
       left:-410px;
       top:20px;
     }
+
     #colorSpacingBox {
+
       position:relative;
       left:-350px;
-      border:1px dashed grey;
+      border:1px solid grey;
       top:40px;
       height:125px;
       width:300px;
@@ -113,23 +121,23 @@
     <div id = "instructionBox2">
       Note down the results
     </div>
-    <div id = "buttons1">
+    <div id = "buttons1" style = "border-radius: 10px">
       <input type = "button" id = "selectImage" value = "Select Images">
       <input type = "button" id = "Reset" value = "Re set">
       <input type = "button" id = "Run" value = "Run">
     </div>
-    <div id = "buttons2">
+    <div id = "buttons2" style = "border-radius: 10px">
       <input type = "button" id = "ColorSpacing" value = "Color Spacing">
       <input type = "button" id = "Processing" value = "Processing">
     </div>
     <div id = "colorSpacingBox">
       Select Color Spacing:
-      <div id = "colorSpacingButtons" style =  "display: block">
+      <div id = "colorSpacingButtons" style =  "display: block;">
       <input type = "radio" name = "csp" id = "HSI" checked = "True" ><span>HSI</span><br>
       <input type = "radio" name = "csp" id = "CMY"><span>CMY</span><br>
       <input type = "radio" name = "csp" id = "YCrCb"><span>YCrCb</span>
       </div>
-      <div id = "processingButtons" style = "display: none">
+      <div id = "processingButtons"  style = "display: none; ">
       <input type = "radio" name = "csp2" id = "HSI1"><span>HSI</span><br>
       <input type = "radio" name = "csp2" id = "CMY1"><span>CMY</span><br>
       <input type = "radio" name = "csp2" id = "RGB"><span>RGB</span>
@@ -153,8 +161,8 @@
         <input type = "checkbox" id = "Blue"><span>Blue</span><br>
       </div>
       <div id = "linearAndHist" style = "position:relative;top:10px">
-        <input type = "button" id = "linear" value = "Linear">
-        <input type = "button" id = "histogram" value = "Histogram">
+        <input type = "button" style = "border-radius: 10px;" id = "linear" value = "Linear">
+        <input type = "button" style = "border-radius: 10px;" id = "histogram" value = "Histogram">
       </div>
       <div style = "position: relative;top:20px; display:block;" id = "linearfunction">
         f(r) = 
@@ -216,12 +224,14 @@
     <span style = "position:relative;top:40px;left:-310px;color:white">Blue Chroma</span>
     <span style = "position:relative;top:20px;left:120px;color:white">RedChroma</span>
   </div>
-  <div id = "io" style = "display:none;position:absolute;left:500px;top:190px; border:1px solid white;height:300px; width:600px">
+  <div id = "io" style = "display:none;position:relative;left:120px;top:-270px; border:1px solid white;height:300px; width:600px">
     <img id = "finalInput" width = 150 height = 150 style = "position:relative;top:75px;left:25px; border:1px solid white;">
     <canvas id = "finalOutput" width = 150 height = 150 style = "position:relative;top:75px;left:125px; border:1px solid white;"></canvas>
     <span style = "position:relative; top:100px;left:-285px;font-size: 20px;">Input Image</span>
     <span style = "position:relative;top:100px; left:-130px;font-size: 20px;">Output Image</span>
   </div>
+  <canvas id = "graph">
+  </canvas>
     <div id = "imageGrid" style = "display: none">
 
 
